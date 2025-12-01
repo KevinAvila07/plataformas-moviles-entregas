@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Versiones con Git</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Git Tutorial</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#comandos">Comandos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#comparacion">Comparación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#formulario">Formulario</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container Component -->
+    <div class="container my-5">
+        <!-- Alert Component (Bonus Track) -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>¡Bienvenido!</strong> Esta página te ayudará a aprender los comandos básicos de Git.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Título centrado -->
+        <h1 class="text-center mb-4">Control de Versiones con Git</h1>
+
+        <!-- Primer párrafo más grande -->
+        <p class="lead text-center"><strong>Git</strong> es un sistema de control de versiones distribuido, ampliamente
+            utilizado en el desarrollo de
+            software moderno. Fue creado para gestionar proyectos de forma rápida, eficiente y colaborativa.</p>
+
+        <!-- Botones para componentes avanzados (Bonus Track) -->
+        <div class="text-center mb-4">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#infoModal">
+                Más información
+            </button>
+            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+                Ver recursos adicionales
+            </button>
+            <button type="button" class="btn btn-info" onclick="showToast()">
+                Mostrar notificación
+            </button>
+        </div>
+
+        <!-- Collapse Component (Bonus Track) -->
+        <div class="collapse mb-4" id="collapseExample">
+            <div class="card card-body">
+                <h5>Recursos adicionales</h5>
+                <ul>
+                    <li><a href="https://git-scm.com/doc" target="_blank">Documentación oficial de Git</a></li>
+                    <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                    <li><a href="https://learngitbranching.js.org/" target="_blank">Learn Git Branching
+                            (interactivo)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Comandos en Card Component -->
+        <div class="card shadow mb-4" id="comandos">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Comandos más populares de Git</h2>
+            </div>
+            <div class="card-body">
+                <!-- List Group Component -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><code>git init</code> - Inicializa un nuevo repositorio Git en el
+                        directorio actual. Este comando crea un repositorio vacío.</li>
+                    <li class="list-group-item"><code>git clone [url]</code> - Clona un repositorio remoto en tu máquina
+                        local. Ejemplo: <code>git clone https://github.com/usuario/repositorio.git</code>.</li>
+                    <li class="list-group-item"><code>git status</code> - Muestra el estado del repositorio: archivos
+                        modificados, nuevos archivos no rastreados, cambios preparados para el commit, etc.</li>
+                    <li class="list-group-item"><code>git add [archivo]</code> - Agrega un archivo o cambios específicos
+                        al área de preparación (staging area) para el commit.</li>
+                    <li class="list-group-item"><code>git commit -m "[mensaje]"</code> - Crea un commit con los archivos
+                        añadidos al área de preparación, agregando un mensaje descriptivo.</li>
+                    <li class="list-group-item"><code>git push</code> - Sube los cambios locales al repositorio remoto.
+                        Generalmente se usa después de un commit para actualizar el repositorio remoto.</li>
+                    <li class="list-group-item"><code>git pull</code> - Obtiene y combina los cambios del repositorio
+                        remoto al local. Equivalente a <code>git fetch</code> seguido de <code>git merge</code>.</li>
+                    <li class="list-group-item"><code>git checkout [rama]</code> - Cambia a una rama específica del
+                        repositorio. Si la rama no existe, se puede crear con <code>git checkout -b [rama]</code>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Accordion Component -->
+        <div class="accordion mb-4" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        ¿Qué es un commit?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Un <strong>commit</strong> es una instantánea de los cambios en tu repositorio. Cada commit
+                        tiene un identificador único y un mensaje que describe los cambios realizados.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        ¿Qué es una rama (branch)?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Una <strong>rama</strong> es una línea de desarrollo independiente. Te permite trabajar en
+                        nuevas características sin afectar la rama principal (main/master).
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        ¿Qué es un merge?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Un <strong>merge</strong> combina los cambios de diferentes ramas. Es fundamental para integrar
+                        el trabajo de múltiples desarrolladores.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla con estilos de Bootstrap -->
+        <h2 id="comparacion">Comparación con otros sistemas</h2>
+        <div class="table-responsive mb-4">
+            <table class="table table-striped table-hover table-bordered shadow">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sistema</th>
+                        <th>Tipo</th>
+                        <th>Popularidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Git</td>
+                        <td>Distribuido</td>
+                        <td><span class="badge bg-success">Muy alta</span></td>
+                    </tr>
+                    <tr>
+                        <td>SVN</td>
+                        <td>Centralizado</td>
+                        <td><span class="badge bg-warning text-dark">Media</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mercurial</td>
+                        <td>Distribuido</td>
+                        <td><span class="badge bg-secondary">Baja</span></td>
+                    </tr>
+                    <tr>
+                        <td>Perforce</td>
+                        <td>Centralizado</td>
+                        <td><span class="badge bg-info text-dark">Especializado (AAA, empresas)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Formulario con estilos de Bootstrap -->
+        <div class="card shadow" id="formulario">
+            <div class="card-header bg-success text-white">
+                <h2 class="mb-0">¿Ya usaste Git?</h2>
+            </div>
+            <div class="card-body">
+                <p>Completá el siguiente formulario para compartir tu experiencia:</p>
+
+                <form class="form">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Tu nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control"
+                            placeholder="Ingresá tu nombre">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="experiencia" class="form-label">¿Qué usás más?</label>
+                        <select id="experiencia" name="experiencia" class="form-select">
+                            <option value="git">Git</option>
+                            <option value="github">Git + GitHub</option>
+                            <option value="otro">Otro sistema</option>
+                            <option value="ninguno">Todavía no uso ninguno</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Enviar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Component (Bonus Track) -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Información sobre Git</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Git</strong> fue creado por Linus Torvalds en 2005 para el desarrollo del kernel de
+                        Linux.</p>
+                    <p>Características principales:</p>
+                    <ul>
+                        <li>Sistema distribuido</li>
+                        <li>Rápido y eficiente</li>
+                        <li>Soporte para desarrollo no lineal</li>
+                        <li>Integridad de datos</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="https://git-scm.com/" target="_blank" class="btn btn-primary">Visitar sitio oficial</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Component (Bonus Track) -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Git Tutorial</strong>
+                <small>Ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                ¡Gracias por visitar nuestra guía de Git! 🚀
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Script para Toast -->
+    <script>
+        function showToast() {
+            const toastElement = document.getElementById('liveToast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+/* 1. Color de fondo del documento y color del texto */
+body {
+    background-color: #222;
+    color: #ee6;
+}
+
+/* 2. Centrar el título principal */
+h1 {
+    text-align: center;
+}
+
+/* 3. Párrafos con fuente sans-serif */
+p {
+    font-family: sans-serif;
+}
+
+/* 4. Color de todos los títulos */
+h1, h2, h3, h4, h5, h6 {
+    color: #eee;
+}
+
+/* 5. Borde inferior blanco a elementos strong */
+strong {
+    border-bottom: 1px solid white;
+}
+
+/* 6. Fondo gris y texto en negrita para clase the-force */
+.the-force {
+    background-color: #444;
+    font-weight: bold;
+}
+
+/* 7. Color para light-side y dark-side */
+.light-side {
+    color: #66f;
+}
+
+.dark-side {
+    color: #f33;
+}
+
+/* 8. List style circle para og-trilogy */
+#og-trilogy {
+    list-style-type: circle;
+}
+
+/* 9. Padding-left al segundo listado de películas */
+.movies-list:nth-of-type(2) {
+    padding-left: 40px;
+}
+
+/* 10. Margin-top al último elemento del tercer listado */
+.movies-list:nth-of-type(3) li:last-child {
+    margin-top: 20px;
+}
+
+/* BONUS TRACKS */
+
+/* Bonus 1: Títulos en mayúscula */
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+}
+
+/* Bonus 2: Primera línea del primer párrafo color #efe */
+p:first-of-type::first-line {
+    color: #efe;
+}
+
+/* Bonus 3: Título principal cambia de color al pasar el puntero */
+h1:hover {
+    color: #ff0;
+}
+
+/* Bonus 4: Links visitados en gris */
+a:visited {
+    color: gray;
+}
+
+/* Bonus 5: Links sin href en cursiva */
+a:not([href]) {
+    font-style: italic;
+}
+
+/* Bonus 6: Color de fondo alternado en elementos de listados */
+.movies-list li:nth-child(odd) {
+    background-color: #111;
+}
+
+.movies-list li:nth-child(even) {
+    background-color: #333;
+}

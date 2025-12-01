@@ -1,0 +1,58 @@
+/* 1. Centrar el título h1 */
+/* Especificidad necesaria: mayor que h1 (0,0,1) */
+#contenedor h1 {
+    text-align: center;
+}
+
+/* 2. Fuente con serifas para todos los párrafos */
+/* Especificidad necesaria: mayor que p (0,0,1) */
+body p {
+    font-family: serif;
+}
+
+/* 3. Color de fondo #CEE para #primer-parrafo */
+/* Especificidad necesaria: mayor que #primer-parrafo (1,0,0) */
+#contenedor #primer-parrafo {
+    background-color: #CEE;
+}
+
+/* 4. Color #933 para elementos em del primer párrafo */
+/* Especificidad necesaria: mayor que p.importante em (0,1,2) */
+#primer-parrafo.importante em {
+    color: #933;
+}
+
+/* 5. Outline para todos los links */
+/* Especificidad necesaria: mayor que p.novelas a (0,1,1) */
+body p a {
+    outline: 1px solid #333;
+}
+
+/* 6. Opacidad 100% para p.fuente */
+/* Especificidad necesaria: mayor que body p.fuente.parrafo (0,2,2) */
+body p.fuente.parrafo {
+    opacity: 100%;
+}
+
+/* 7. Sin sombra para párrafos sin id */
+/* Especificidad: (0,0,1) */
+p:not([id]) {
+    text-shadow: none;
+}
+
+/* BONUS TRACKS */
+
+/* Bonus 1: Color #000 para p.fuente */
+/* Especificidad necesaria: mayor que body p.fuente.parrafo con !important */
+/* Necesitamos usar !important porque la regla original usa !important */
+html body p.fuente.parrafo {
+    color: #000 !important;
+}
+
+/* Bonus 2: Elemento .complicado en negrita y color #C62 */
+/* Especificidad necesaria: mayor que el style inline (1,0,0) */
+/* Para superar un estilo inline necesitamos !important */
+.complicado {
+    font-weight: bold !important;
+    color: #C62 !important;
+}
