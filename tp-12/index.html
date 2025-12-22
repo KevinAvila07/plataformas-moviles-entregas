@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor de Texto - DOM y JavaScript</title>
+    <!-- Usando Bootstrap 5.3.2 para consistencia con los TPs anteriores -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .texto {
+            font-size: 16px;
+            /* Tamaño base inicial */
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-1 my-sm-2 my-md-4 my-lg-5">
+        <h1>Editor de Texto</h1>
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <!-- Sección de Visualización -->
+                <h2>Vista Previa</h2>
+                <div class="p-3 border rounded bg-light mb-4">
+                    <p class="texto m-0" id="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                        elementum auctor libero, vel imperdiet est. Etiam blandit facilisis ex, nec cursus metus
+                        pharetra quis. Fusce imperdiet nisl nibh, ac aliquet ante elementum vitae.</p>
+                </div>
+
+                <!-- Sección de Edición de Contenido (Consigna 3) -->
+                <div class="mb-4">
+                    <label for="inputTexto" class="form-label"><strong>Editar Texto:</strong></label>
+                    <textarea id="inputTexto" class="form-control"
+                        rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum auctor libero, vel imperdiet est. Etiam blandit facilisis ex, nec cursus metus pharetra quis. Fusce imperdiet nisl nibh, ac aliquet ante elementum vitae.</textarea>
+                </div>
+
+                <hr class="hr">
+
+                <h2>Opciones de Formato</h2>
+                <div class="row g-2">
+                    <!-- Botones Originales -->
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button id="btn-negrita" class="btn d-block w-100 btn-primary" data-formato="negrita">
+                            Bold (Negrita)
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button id="btn-cursiva" class="btn d-block w-100 btn-primary" data-formato="cursiva">
+                            Italic (Cursiva)
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button id="btn-subrayado" class="btn d-block w-100 btn-primary" data-formato="subrayado">
+                            Underline (Subrayado)
+                        </button>
+                    </div>
+
+                    <!-- Nuevo Botón de Estilo (Consigna 2: Color) -->
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button id="btn-color" class="btn d-block w-100 btn-primary" data-formato="color">
+                            Color Rojo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Control de Tamaño de Texto (Consigna 5) -->
+                <div class="row mt-3 align-items-center">
+                    <div class="col-12 col-md-auto">
+                        <strong>Tamaño de fuente:</strong>
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <div class="btn-group" role="group">
+                            <button id="btn-menos-size" class="btn btn-outline-secondary"
+                                onclick="cambiarTamano(-2)">-</button>
+                            <span class="btn btn-outline-secondary disabled text-dark" id="display-size">16px</span>
+                            <button id="btn-mas-size" class="btn btn-outline-secondary"
+                                onclick="cambiarTamano(2)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        // Referencia al elemento de texto
+        const textoElemento = document.getElementById('texto');
+
+        // Estado inicial del tamaño de fuente
+        let tamanoActual = 16;
+
+        /**
+         * Función auxiliar para alternar el estado visual de los botones (Consigna 4)
+         */
+        function toggleBotonEstado(btnId) {
+            const btn = document.getElementById(btnId);
+            if (btn.classList.contains('btn-primary')) {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-success'); // Verde para indicar activo
+            } else {
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-primary');
+            }
+        }
+
+        /**
+         * funcionNegrita()
+         */
+        function funcionNegrita() {
+            // Usamos clases de Bootstrap para estilizar
+            textoElemento.classList.toggle('fw-bold');
+            toggleBotonEstado('btn-negrita');
+        }
+
+        /**
+         * funcionCursiva()
+         */
+        function funcionCursiva() {
+            textoElemento.classList.toggle('fst-italic');
+            toggleBotonEstado('btn-cursiva');
+        }
+
+        /**
+         * funcionSubrayado()
+         */
+        function funcionSubrayado() {
+            textoElemento.classList.toggle('text-decoration-underline');
+            toggleBotonEstado('btn-subrayado');
+        }
+
+        /**
+         * funcionColor() - Nuevo estilo adicional
+         */
+        function funcionColor() {
+            textoElemento.classList.toggle('text-danger'); // Color rojo de Bootstrap
+            toggleBotonEstado('btn-color');
+        }
+
+        /**
+         * Funcionalidad para modificar el tamaño del texto
+         */
+        function cambiarTamano(delta) {
+            tamanoActual += delta;
+            // Limitamos un poco el tamaño mínimo y máximo para que no se rompa
+            if (tamanoActual < 8) tamanoActual = 8;
+            if (tamanoActual > 48) tamanoActual = 48;
+
+            textoElemento.style.fontSize = tamanoActual + 'px';
+            document.getElementById('display-size').innerText = tamanoActual + 'px';
+        }
+
+        function handlerBoton(e) {
+            // Obtiene el valor del atributo "data-formato" del botón que disparó el evento
+            const funcionBoton = e.target.dataset.formato;
+            switch (funcionBoton) {
+                case 'negrita':
+                    funcionNegrita();
+                    break;
+                case 'cursiva':
+                    funcionCursiva();
+                    break;
+                case 'subrayado':
+                    funcionSubrayado();
+                    break;
+                case 'color':
+                    funcionColor();
+                    break;
+            }
+        }
+
+        // Listener para los botones de formato
+        document.querySelectorAll('button[data-formato]').forEach(e => e.addEventListener('click', handlerBoton));
+
+        // Listener para la edición de texto en tiempo real
+        document.getElementById('inputTexto').addEventListener('input', function (e) {
+            textoElemento.innerText = e.target.value;
+        });
+
+    </script>
+</body>
+
+</html>
